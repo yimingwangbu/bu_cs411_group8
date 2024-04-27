@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Artwork Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+<body>
+    <header>
+        <h1>Movie to Artwork Recommendation Generator</h1>
+        <a href="{{ url_for('main.index') }}">Home</a>
+    </header>
+    <div class="main">
+        <div class="main-content">
+            <form method="post" action="{{ url_for('main.book_to_movie') }}">
+                <div class="form-box">
+                    <div style="display: flex;align-items: center;height: 80px;">
+                        <label for="book">Movie Name:</label>
+                        <input type="text" name="book" id="book" required>
+                    </div>
+                    <button type="submit">Generate Recommendation </button>
+                </div>
+            </form>
+
+           <div class="bottom-content" >
+               {% if movie_data %}
+            <div style="display: flex;flex-direction: column;">
+                <h2>Movie</h2>
+                <div class="item-box">
+                    <ul>
+                    <li><strong>Title:</strong> {{ movie_data.title}}</li>
+                    <li><strong>Overview:</strong> {{ movie_data.overview }}</li>
+                    <li><strong>Date:</strong> {{ movie_data.release_date}}</li>
+                    <li><strong>Rating:</strong> {{ movie_data.vote_average}}</li>
+                    </ul>
+                </div>
+            </div>
+               {% endif %}
+               {% if artwork_data %}
+            <div style="display: flex; flex-direction: column;">
+                <h2 style="margin-right: 65px;">Artwork</h2>
+                <div class="item-box">
+                    <ul>
+                        <li><strong>Title:</strong> {{ artwork_data['title'] }}</li>
+                    <li><strong>Year:</strong> {{ artwork_data['accessionYear'] }}</li>
+                    </ul>
+                     <img src="{{ artwork_data['primaryImage'] }}" alt="artwork image" />
+                </div>
+            </div>
+               {% endif %}
+           </div>
+        </div>
+
+
+    </div>
+</body>
+<style>
+    /* Additional inline styles for a fancier look */
+    /* CSS styling for the document */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* background-color: rgb(16,27,56,0.9); */
+        background-color: rgb(7, 24, 59);
+        margin: 1;
+        padding: 0;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+        align-items: center;
+        background-color: rgba(5, 55, 110);
+
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        height: 100px;
+        box-sizing: border-box;
+    }
+
+    header a {
+        display: inline-block;
+        width: 84px;
+        height: 36px;
+        border: 1px solid #dedede;
+        border-radius: 26px;
+        line-height: 36px;
+        text-align: center;
+
+    }
+
+    header h1 {
+        font-size: 40px;
+        margin: 1;
+        text-transform: uppercase;
+    }
+
+    header a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 10px;
+        font-weight: bold;
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1200px;
+        height: calc(100vh - 200px);
+        box-sizing: border-box;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: rgb(5, 55, 110);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        width: 1200px;
+        height: 700px;
+
+    }
+.bottom-content{
+    padding: 60px;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+    form {
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    label {
+        width: 200px;
+        display: inline-block;
+        color: #fff;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 16px;
+        font-size: 20px;
+        margin-left: 86px;
+    }
+
+    input[type="text"] {
+        /* width: calc(100% - 22px); */
+        width: 400px;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 20px;
+    }
+
+    button[type="submit"] {
+        width: 300px;
+        height: 50px;
+        background-color: rgb(5 93 135);
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 20px;
+        margin-left: 80px;
+        margin-top: 8px;
+    }
+
+    .item-box {
+        width: 460px;
+        /* border: 1px solid #fff; */
+        padding: 20px;
+        padding-top: 0;
+        /* margin-top: 20px; */
+        border-radius: 8px;
+        color: black;
+    }
+ul li{
+    line-height: 42px;
+}
+    .item-box p {
+        color: #fff;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-top: 19px;
+        color: #fff;
+        margin-right: 90px;
+
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.5;
+        color: #555;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+    }
+    .form-box{
+        display: flex;
+    }
+</style>
+</head>
+
+</html>

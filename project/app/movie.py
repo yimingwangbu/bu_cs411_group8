@@ -1,0 +1,1 @@
+import requestsdef get_movie(name,api_key):    url = f"https://api.themoviedb.org/3/search/movie?query={name}&api_key={api_key}"    response = requests.get(url)    return response.json()["results"][0]

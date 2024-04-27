@@ -1,0 +1,1 @@
+import requestsdef get_book(name,api):    url = f'https://www.googleapis.com/books/v1/volumes?q={name}&key={api}'    response = requests.get(url)    return response.json()["items"][0]
